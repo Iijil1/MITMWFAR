@@ -60,3 +60,5 @@ MITMWFAR -n=9 -m=1 -pm=1 < holdouts.std.txt > solved.sc.txt
 MITMWFAR -sc -pm=2 < solved.sc.txt > solved.fc.txt
 MITMWFAR -fc < solved.fc.txt
 ```
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14914502.svg)](https://doi.org/10.5281/zenodo.14914502)
