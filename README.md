@@ -1,6 +1,6 @@
 # MITM-WFAR
 
-Using weighted automatons to describe non-regular languages that solve the halting problem for some turing machines
+Using weighted automatons to describe non-regular languages that solve the halting problem for some Turing machines
 
 # Theory
  
@@ -10,15 +10,15 @@ When we run the left and right half of the tape through the WA any word will res
 
 It is fairly simple to check if such a language given accept set is forward-closed under TM transitions. Since we know the weight of the edges you follow when going left/right by one symbol we can keep track of the difference while doing the usual checks for MITM-DFAs.
 
-Unless regular MITM-DFA would have solved the TM we'll also need to make use of the weights. To do so we consider special sets of states in the WA: States were the weight is always nonnegative or nonpositive. Note that in a WA with only positive weights all states will always have a nonnegative weight. States that cannot be reached after passing through a weighted transition will also be nonpositive. These special sets allow us to rule out some combinations of WA states and weight sums when checking if an accept set is forward-closed: If both left and right WA are in a nonpositive state then the weight sum can never be positive. So even if such a combination arises from the typical MITM-DFA check we can disregard it since these residues can never be the result of an actual tm configuration.
+Unless regular MITM-DFA would have solved the TM we'll also need to make use of the weights. To do so we consider special sets of states in the WA: States were the weight is always nonnegative or nonpositive. Note that in a WA with only positive weights all states will always have a nonnegative weight. States that cannot be reached after passing through a weighted transition will also be nonpositive. These special sets allow us to rule out some combinations of WA states and weight sums when checking if an accept set is forward-closed: If both left and right WA are in a nonpositive state then the weight sum can never be positive. So even if such a combination arises from the typical MITM-DFA check we can disregard it since these residues can never be the result of an actual TM configuration.
 
-If the accept set is forward-closed, accepts the starting configuration and doesn't accept any head-configurations that halt, then we know that the tm can never halt.
+If the accept set is forward-closed, accepts the starting configuration and doesn't accept any head-configurations that halt, then we know that the TM can never halt.
 
 There is another explanation of this [on discord](https://discord.com/channels/960643023006490684/960655108578881597/1085884481241616444). Though with slight differences, like using the difference of weights between the WA instead of the sum.
 
 # Certificates
 
-The certificates this decider uses should be usable to prove that the tm specified in the certificate doesn't halt with minimal additional computation required. They are given in text format over multiple lines. Certificates for many machines can be appended into the same file.
+The certificates this decider uses should be usable to prove that the TM specified in the certificate doesn't halt with minimal additional computation required. They are given in text format over multiple lines. Certificates for many machines can be appended into the same file.
 
 ## Full Certificate
 
@@ -28,7 +28,7 @@ The full certificates has 6 lines:
 3. the right WA
 4. the left special sets
 5. the right special sets
-6. the accept set with all accepted 6-tuples of (tm state, tm symbol, left WA state, right WA state, lower bound of weight sum, upper bound of weight sum)
+6. the accept set with all accepted 6-tuples of (TM state, TM symbol, left WA state, right WA state, lower bound of weight sum, upper bound of weight sum)
 
 When checking the certificates the decider ensures that all given information is correct. It checks that the states in the special sets are indeed nonnegative/nonpositive and the accept set has the required properties. 
 
@@ -36,7 +36,7 @@ When checking the certificates the decider ensures that all given information is
 
 Short certificates only include the first 3 lines of the full certificate, reminiscent of MITM-DFA certificates, where the accept sets can be derived from the DFA. Here we can obtain the special sets of the WA easily enough. The accept set can be derived by starting with the tuple that accepts the start configuration and then expanding the accept set as necessary.
 
-However, other than in the DFA case this is not a deterministic process as we have the potential to have infinite accept sets with ever growing weight intervals. In an attempt to find finite accept sets in those cases we switch to unbounded intervals after there length exceeds 1000. This heuristic makes the process non-deterministic and sensitive to implementation details. While this implementation is consistent and will always extend a given short certificate to the same full certificate that might not hold with reproductions. So this is not a true certificate. It is however easier to digest for humans and should contain enough information to find the full solution quickly.
+However, other than in the DFA case this is not a deterministic process as we have the potential to have infinite accept sets with ever growing weight intervals. In an attempt to find finite accept sets in those cases we switch to unbounded intervals after their length exceeds 1000. This heuristic makes the process non-deterministic and sensitive to implementation details. While this implementation is consistent and will always extend a given short certificate to the same full certificate that might not hold with reproductions. So this is not a true certificate. It is however easier to digest for humans and should contain enough information to find the full solution quickly.
 
 # Search Strategy
 
